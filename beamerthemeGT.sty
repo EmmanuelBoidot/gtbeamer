@@ -1,0 +1,150 @@
+% Copyright 2014 by Emmanuel Boidot <eboidot3@gatech.edu>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+\mode<presentation>
+
+\usetheme{Warsaw}
+\useinnertheme[shadow=true]{rounded}
+\setbeamertemplate{frametitle}[default][shadow=false]
+\useoutertheme[subsection=false]{miniframes}
+\setbeamertemplate{mini frame in other section}[default][20]
+\setbeamertemplate{section/subsection in toc}[subsections numbered]
+\usepackage{totcount}
+\usepackage{tikz}
+
+\newif\if@darkOption
+\@darkOptionfalse
+\DeclareOption{dark}{\@darkOptiontrue}
+
+\newif\if@sectionTocOption
+\@sectionTocOptionfalse
+\DeclareOption{sectionToc}{\@sectionTocOptiontrue}
+\ProcessOptions
+% choose between dark and light colors
+\if@darkOption
+	\usecolortheme{buzz-dark}
+\else
+	\usecolortheme{buzz-light}
+\fi
+% if section table of content want, add sectionToc option to the theme
+\if@sectionTocOption
+	\AtBeginSection[]{%
+	   \begin{frame}
+	  	\frametitle{\insertsection}
+		\setcounter{tocdepth}{2	}
+	  	\tableofcontents[
+	  		currentsection,
+	  		sectionstyle=show/hide,
+	  		subsectionstyle=show/show/hide
+		]
+		\end{frame}
+	}
+\fi
+
+\regtotcounter{section}
+\newcounter{vertrules}
+
+\setbeamerfont{block title}{size={}}
+\let\Tiny=\tiny
+
+%\setbeamertemplate{navigation symbols}{}
+
+%\setbeamertemplate{headline}
+%{%
+%  \begin{beamercolorbox}[wd=\paperwidth,ht=2em]{myheadline}
+%    \vskip1.5ex%
+%    \insertsectionnavigationhorizontal{\paperwidth}{\hskip-0pt}{\hskip-0pt}\vskip2pt
+%  \end{beamercolorbox}%
+%  \setcounter{vertrules}{\totvalue{section}}
+%  \ifnum\thevertrules<2 \else
+%  \addtocounter{vertrules}{-1}
+%  \fi%
+%}
+
+%\setbeamertemplate{section in head/foot}{%
+%    \hspace*{-4pt}\setlength\fboxsep{0pt}%
+%    \parbox[c][2ex][t]{\dimexpr\sectionboxwd\relax}{%
+%      \hfill\parbox{\dimexpr\sectionboxwd\relax}{%
+%      \raggedright\insertsectionhead%
+%      }\hfill\mbox{}%
+%    }\hspace*{4pt}%
+%}
+%\newlength\sectionboxwd
+%
+%\AtBeginDocument{%
+%  \ifnum\totvalue{section}>0 
+%    \setlength\sectionboxwd{\dimexpr\paperwidth/\totvalue{section}\relax}
+%  \else
+%    \setlength\sectionboxwd{\paperwidth}
+%  \fi
+%} 
+
+
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+%slide number
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle  \hfill\insertframenumber\strut\quad 
+%/\inserttotalframenumber
+  \end{beamercolorbox}}%
+}
+
+\usepackage{etoolbox} % this can cause issues with biblatex
+\makeatletter
+\patchcmd{\slideentry}{\advance\beamer@xpos by1\relax}{}{}{}
+\def\beamer@subsectionentry#1#2#3#4#5{\advance\beamer@xpos by1\relax}%
+\makeatother
+
+\makeatletter
+\setbeamertemplate{subsection in navigation}
+  {\vspace*{-\baselineskip}}
+\setbeamertemplate{subsection in navigation shaded}
+  {\vspace*{-\baselineskip}}
+\makeatother
+
+\AtBeginEnvironment{exampleblock}{%
+	\setbeamercolor{itemize item}{fg=gtgold,bg=gtgold}
+	\setbeamercolor{itemize subitem}{fg=gtgold,bg=gtgold}
+	\setbeamercolor{itemize subsubitem}{fg=gtgold,bg=gtgold}
+}
+
+% for the list of parts\parttitle
+\makeatletter
+\AtBeginPart{%
+    {
+    	\addtocontents{parttoc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partname}{\the\c@page}}
+		%\setbeamertemplate{headline}{}
+		\begin{frame}
+%		\begin{center}
+%		{\Large Part \Roman{part}}
+%		\end{center}
+%		\begin{block}{}
+%		\begin{center}
+%		{\Large \insertpart}
+%		\end{center}
+%		\end{block}
+		\partpage	
+		\tableofcontents[
+		  currentsection,
+		  sectionstyle=show/show,
+		  subsectionstyle=hide/hide/hide
+		]	
+		\end{frame} 
+	}
+}
+
+\newcommand{\parttableofcontents}{\@starttoc{parttoc}}
+\newcommand{\beamer@partintoc}[3]{#2\par}
+\makeatother
+
+\logo{\includegraphics[width=0.2\textwidth]{logoGT.PNG}}
+
+\mode <all>

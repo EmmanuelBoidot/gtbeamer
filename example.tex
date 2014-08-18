@@ -1,0 +1,132 @@
+% Copyright 2014 by Emmanuel Boidot <eboidot3@gatech.edu>
+\documentclass[10pt,compress]{beamer}
+
+\usetheme[dark,sectionToc]{GT} % remove the dark option for golden frame titles
+%\usetheme[dark]{GT}
+\usepackage{graphicx}
+
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage[footnotesize]{subfigure}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+% uncomment for Times font
+%\usepackage{times}
+%\usepackage[T1]{fontenc}
+\usepackage{appendixnumberbeamer}
+\usepackage{rotating}
+\usepackage{color}
+
+
+\title[Ambush avoidance routing] % (optional, use only with long paper titles)
+{Ambush avoidance in unstructured environments: \textit{from game theory to path planning}}
+
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+\author[E. Boidot]{Ph.D. Proposal by Emmanuel Boidot}
+\institute % (optional, but mostly needed)
+{Advisor: Dr. Eric Feron \\ Georgia Institute of Technology\\
+  Guggenheim School of Aerospace Engineering}
+
+\date{November $3^{rd}$, 2014} % (optional, should be abbreviation of conference name)
+
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+% \logo{logo.png}
+
+\subject{Graceful Degradation}
+%\logo{\includegraphics[width=0.2\textwidth]{logoGT.PNG}}
+
+\begin{document}
+
+{
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{images/logos/Georgia-Tech-Insignia-Watermark-1200x1100}}
+\setbeamertemplate{headline}{}
+\setlength{\headheight}{0in}
+\setbeamertemplate{footline}{}
+\begin{frame}
+\titlepage
+\end{frame}
+}
+\addtocounter{framenumber}{-1}
+
+{
+\setbeamertemplate{headline}{}
+\begin{frame}\frametitle{Outline}
+  \parttableofcontents
+\end{frame} 
+}
+
+\part[Intro]{Introduction} 
+
+\section{Section 1}
+\subsection{Subsection 1.1}
+\begin{frame}\frametitle{Intro - Frame 1} 
+\begin{block}{Basic Block Title}
+\begin{itemize}
+ \item This is the basic block
+\item use \textbackslash begin\{block\}...\textbackslash end\{block\}
+\end{itemize}
+\end{block}
+\pause
+\begin{columns}
+\begin{column}{5cm}
+\begin{exampleblock}{Example Block 1}
+\begin{itemize}
+ \item This is an example block
+\item use \textbackslash begin\{exampleblock\}\\ ...\textbackslash end\{exampleblock\}
+\end{itemize}
+\end{exampleblock}
+\pause
+\end{column}
+\begin{column}{5cm}
+\begin{exampleblock}{Example Block 2}
+.\\
+.\\
+.\\
+.\\
+\end{exampleblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+\subsection{Subsection 1.2}
+\begin{frame}\frametitle{Test frame one}
+\begin{alertblock}{Alerted Title}
+\begin{itemize}
+ \item This is an alert block
+ \item Use it for questions
+\item use \textbackslash begin\{exampleblock\}\\ ...\textbackslash end\{exampleblock\}
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+\section{Section 2}
+\subsection{Subsection 2.1}
+\begin{frame}\frametitle{Test frame - Subsection I.2.1}test\end{frame}
+\subsection{Subsection 2.2}
+\begin{frame}\frametitle{Test frame - Subsection I.2.2}test\end{frame}
+
+\section{Section 3}
+\subsection{Subsection 3.1}
+\begin{frame}\frametitle{Test frame - Subsection I.3.1}test\end{frame}
+\subsection{Subsection 3.2}
+\begin{frame}\frametitle{Test frame - Subsection I.3.2}test\end{frame}
+\subsection{Subsection 3.3}
+\begin{frame}\frametitle{Test frame - Subsection I.3.3}test\end{frame}
+
+\part{Part two}
+
+\section[Section 1]{Test Section One with a really long title}
+\begin{frame}\frametitle{Test frame two}test\end{frame}
+\section{Test Section Two}
+\begin{frame}\frametitle{Test frame two}test\end{frame}
+\section{Test Section Three}
+\begin{frame}\frametitle{Test frame three}test\end{frame}
+\section{Test Section Four}
+\begin{frame}\frametitle{Test frame four}test\end{frame}
+
+\end{document}
