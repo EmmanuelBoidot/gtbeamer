@@ -1,7 +1,7 @@
-# Install for linux users
+# Install for linux or Mac OS users
 # in your home directory, create a texmf folder
 cd ~
 mkdir -p ~/texmf/tex/latex
 mv path/to/directory/gtbeamer ~/texmf/tex/latex #you need to change the first path of this line
 cd ~/texmf
-sudo texhash
+sudo texhash #or sudo /usr/texbin/texhash
