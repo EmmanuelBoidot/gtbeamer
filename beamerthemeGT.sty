@@ -23,6 +23,11 @@
 \newif\if@sectionTocOption
 \@sectionTocOptionfalse
 \DeclareOption{sectionToc}{\@sectionTocOptiontrue}
+
+\newif\if@partTocOption
+\@partTocOptionfalse
+\DeclareOption{partToc}{\@partTocOptiontrue}
+
 \ProcessOptions
 % choose between dark and light colors
 \if@darkOption
@@ -35,15 +40,68 @@
 	\AtBeginSection[]{%
 	   \begin{frame}
 	  	\frametitle{\insertsection}
-		\setcounter{tocdepth}{2	}
+		\setcounter{tocdepth}{2}
 	  	\tableofcontents[
 	  		currentsection,
-	  		sectionstyle=show/hide,
+	  		sectionstyle=hide/hide,
 	  		subsectionstyle=show/show/hide
 		]
 		\end{frame}
 	}
 \fi
+
+\if@partTocOption
+	% for the list of parts\parttitle
+	\makeatletter
+	\AtBeginPart{%
+	    {
+	    	\addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partname}{\the\c@page}}
+			%\setbeamertemplate{headline}{}
+			\begin{frame}
+	%		\begin{center}
+	%		{\Large Part \Roman{part}}
+	%		\end{center}
+	%		\begin{block}{}
+	%		\begin{center}
+	%		{\Large \insertpart}
+	%		\end{center}
+	%		\end{block}
+			\partpage	
+			\tableofcontents[
+			  currentsection,
+			  sectionstyle=show/show,
+			  subsectionstyle=hide/hide/hide
+			]	
+			\end{frame} 
+		}
+	}
+	\makeatother
+\else
+	\makeatletter
+	\AtBeginPart{%
+		\addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partname}{\the\c@page}}%
+	}
+	\makeatother
+\fi
+
+\makeatletter
+%\newcommand{\parttableofcontents}{\@starttoc{parttoc}}
+%\newcommand{\beamer@partintoc}[3]{#2\par}
+
+% number, shortname, page.
+\providecommand\beamer@partintoc[3]{%
+  \ifnum\c@tocdepth=-1\relax
+    % requesting onlyparts.
+    \hyperlink{\advance\beamer@startpageofpart{#1}}{\makebox[3em]{#1} #2}
+    % \hyperlink{\Navigation##1}{\makebox[3em]{#1} #2}
+    \par
+  \fi
+}
+\define@key{beamertoc}{onlyparts}[]{%
+  \c@tocdepth=-1\relax
+}
+\makeatother%
+
 
 \regtotcounter{section}
 \newcounter{vertrules}
@@ -110,40 +168,11 @@
   {\vspace*{-\baselineskip}}
 \makeatother
 
-\AtBeginEnvironment{exampleblock}{%
-	\setbeamercolor{itemize item}{fg=gtgold,bg=gtgold}
-	\setbeamercolor{itemize subitem}{fg=gtgold,bg=gtgold}
-	\setbeamercolor{itemize subsubitem}{fg=gtgold,bg=gtgold}
-}
-
-% for the list of parts\parttitle
-\makeatletter
-\AtBeginPart{%
-    {
-    	\addtocontents{parttoc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partname}{\the\c@page}}
-		%\setbeamertemplate{headline}{}
-		\begin{frame}
-%		\begin{center}
-%		{\Large Part \Roman{part}}
-%		\end{center}
-%		\begin{block}{}
-%		\begin{center}
-%		{\Large \insertpart}
-%		\end{center}
-%		\end{block}
-		\partpage	
-		\tableofcontents[
-		  currentsection,
-		  sectionstyle=show/show,
-		  subsectionstyle=hide/hide/hide
-		]	
-		\end{frame} 
-	}
-}
-
-\newcommand{\parttableofcontents}{\@starttoc{parttoc}}
-\newcommand{\beamer@partintoc}[3]{#2\par}
-\makeatother
+%\AtBeginEnvironment{exampleblock}{%
+%	\setbeamercolor{itemize item}{fg=gtgold,bg=gtgold}
+%	\setbeamercolor{itemize subitem}{fg=gtgold,bg=gtgold}
+%	\setbeamercolor{itemize subsubitem}{fg=gtgold,bg=gtgold}
+%}
 
 \logo{\includegraphics[width=0.2\textwidth]{logoGT.PNG}}
 

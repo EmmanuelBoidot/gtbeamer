@@ -1,7 +1,11 @@
 # Install for linux or Mac OS users
 # in your home directory, create a texmf folder
+
+# that's if you don't already have a texmf directory
 cd ~
 mkdir -p ~/texmf/tex/latex
-mv path/to/directory/gtbeamer ~/texmf/tex/latex #you need to change the first path of this line
-cd ~/texmf
+tlmgr conf texmf TEXMFHOME "~/texmf"
+
+# that's for everybody
+mv path/to/directory/gtbeamer ~/texmf/tex/latex #you need to change the paths of this line
 sudo texhash #or sudo /usr/texbin/texhash
