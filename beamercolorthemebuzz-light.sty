@@ -7,7 +7,7 @@
 %
 \mode<presentation>
 
-\definecolor{gtnavy}{rgb}{0,0,0.4}
+\definecolor{gtnavy}{rgb}{0,0,0.45}
 \definecolor{gtgold}{RGB}{152,126,82}
 \definecolor{gtlightgold}{RGB}{244,242,237}
 \definecolor{gtdarknavy}{RGB}{0,43,85}
@@ -16,8 +16,11 @@
 \definecolor{gtmediumgold}{RGB}{152,126,82}
 
 % Table of content
+%\setbeamercolor{part in toc}{fg=gtdarknavy,bg=white}
 \setbeamercolor{section in toc}{fg=gtdarknavy,bg=white}
-\setbeamercolor{section number projected}{bg=gtdarknavy,fg=white}
+\setbeamercolor{section number projected}{bg=gtgold,fg=white}
+\setbeamercolor{subsection in toc}{fg=gtdarknavy,bg=white}
+\setbeamercolor{subsection number projected}{bg=gtgold,fg=white}
 
 % header, footer, navigation
 \setbeamercolor*{palette primary}{fg=gtdarknavy,bg=gtgold}
@@ -27,7 +30,7 @@
 \setbeamercolor*{sidebar}{fg=gtdarknavy,bg=gtgold}
 
 % first page (title)
-\setbeamercolor{titlelike}{fg=white,bg=gtdarknavy}
+\setbeamercolor{titlelike}{fg=white,bg=gtgold}
 \setbeamercolor{frametitle}{fg=white,bg=gtmediumgold}
 \setbeamercolor{frametitle right}{fg=black,bg=gtmediumgold}
 
@@ -37,12 +40,14 @@
 %\setbeamercolor*{palette sidebar quaternary}{fg=gtgold,bg=gtnavy}
 
 % blocks
-\setbeamercolor{alerted text}{fg=gtdarknavy,bg=gtgold} 
-\setbeamercolor{example text}{fg=gtgold,bg=gtdarknavy} 
 \setbeamercolor{block title}{fg=white,bg=gtdarknavy}
 \setbeamercolor{block body}{fg=black,bg=white!75!bg!95!gtdarknavy}
+%
+\setbeamercolor{alerted text}{fg=gtdarknavy,bg=gtgold} 
 \setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=gtdarknavy}
 \setbeamercolor{block body alerted}{use=alerted text,fg=black,bg=white!75!bg!80!gtdarknavy}
+%
+\setbeamercolor{example text}{fg=gtgold,bg=gtdarknavy} 
 \setbeamercolor{block title example}{use=example text,fg=white,bg=gtgold}
 \setbeamercolor{block body example}{use=example text,fg=black,bg=white!75!bg!90!gtgold}
 

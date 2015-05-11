@@ -35,18 +35,59 @@
 \else
 	\usecolortheme{buzz-light}
 \fi
+
+% for first toc
+\newenvironment<>{tocblock}[1][]{%
+	\if@darkOption
+		\setbeamercolor{block title}{fg=white,bg=gtdarknavy}%
+		\setbeamercolor{block body}{fg=white,bg=gtdarknavy}%
+	\else
+		\setbeamercolor{block title}{fg=white,bg=gtgold}%
+		\setbeamercolor{block body}{fg=white,bg=gtgold}%
+	\fi
+  	\begin{block}{#1}#2}{\end{block}}
+  
+% for section toc
+\newenvironment<>{sectiontocblock}[1][]{%
+	\if@darkOption
+		\setbeamercolor{block title}{fg=black,bg=gtdarknavy}%
+		\setbeamercolor{block body}{fg=black,bg=white!85!bg!95!gtdarknavy}%white!85!bg!95!gtdarknavy
+	\else
+		\setbeamercolor{block title}{fg=gtgold,bg=gtgold}%
+		\setbeamercolor{block body}{fg=gtdarknavy,bg=white!75!bg!90!gtgold}%
+	\fi
+  	\begin{block}{#1}#2}{\end{block}}
+
 % if section table of content want, add sectionToc option to the theme
 \if@sectionTocOption
 	\AtBeginSection[]{%
-	   \begin{frame}
-	  	\frametitle{\insertsection}
-		\setcounter{tocdepth}{2}
-	  	\tableofcontents[
-	  		currentsection,
-	  		sectionstyle=hide/hide,
-	  		subsectionstyle=show/show/hide
-		]
-		\end{frame}
+	\begin{frame}
+	\begin{columns}
+		\begin{column}{.1\textwidth}
+		\end{column}
+		\begin{column}{.7\textwidth}
+		  	%\frametitle{\insertsection}
+			\setcounter{tocdepth}{2}
+			\begin{sectiontocblock}{\insertpart}
+			\begin{columns}
+			\begin{column}{.05\textwidth}
+			
+			\end{column}
+		  	\begin{column}{.95\textwidth}
+		  	\tableofcontents[
+		  		currentsection,
+		  		%sectionstyle=hide/hide,
+		  		subsectionstyle=show/show/hide
+			]
+		  	\end{column}
+		  	\end{columns}
+			\vspace*{.5em}
+			\end{sectiontocblock}
+		\end{column}
+		\begin{column}{.1\textwidth}
+		\end{column}
+	\end{columns}
+	\end{frame}
 	}
 \fi
 
@@ -58,20 +99,20 @@
 	    	\addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partname}{\the\c@page}}
 			%\setbeamertemplate{headline}{}
 			\begin{frame}
-	%		\begin{center}
-	%		{\Large Part \Roman{part}}
-	%		\end{center}
-	%		\begin{block}{}
-	%		\begin{center}
-	%		{\Large \insertpart}
-	%		\end{center}
-	%		\end{block}
+			\hypertarget{part\the\c@part}{}
 			\partpage	
+			\begin{columns}
+			\begin{column}{.05\textwidth}
+			
+			\end{column}
+			\begin{column}{.95\textwidth}
 			\tableofcontents[
 			  currentsection,
 			  sectionstyle=show/show,
 			  subsectionstyle=hide/hide/hide
-			]	
+			]
+			\end{column}
+			\end{columns}	
 			\end{frame} 
 		}
 	}
@@ -80,9 +121,14 @@
 	\makeatletter
 	\AtBeginPart{%
 		\addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partname}{\the\c@page}}%
+		\hypertarget{part\the\c@part}{}
 	}
 	\makeatother
 \fi
+
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
 
 \makeatletter
 %\newcommand{\parttableofcontents}{\@starttoc{parttoc}}
@@ -92,11 +138,12 @@
 \providecommand\beamer@partintoc[3]{%
   \ifnum\c@tocdepth=-1\relax
     % requesting onlyparts.
-    \hyperlink{\advance\beamer@startpageofpart{#1}}{\makebox[3em]{#1} #2}
+    \hyperlink{part#1}{\makebox[4em]{\rom{#1}} #2\vspace{1em}}
     % \hyperlink{\Navigation##1}{\makebox[3em]{#1} #2}
     \par
   \fi
 }
+
 \define@key{beamertoc}{onlyparts}[]{%
   \c@tocdepth=-1\relax
 }
@@ -142,7 +189,7 @@
 %} 
 
 
-\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamersetuncovermixins{\opaqueness<1>{10}}{\opaqueness<2->{5}}
 %slide number
 \setbeamertemplate{footline}{%
   \leavevmode%

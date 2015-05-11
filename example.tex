@@ -1,8 +1,8 @@
 % Copyright 2014 by Emmanuel Boidot <eboidot3@gatech.edu>
 \documentclass[10pt,compress]{beamer}
 
-\usetheme[dark,sectionToc]{GT} % remove the dark option for golden frame titles
-%\usetheme[dark]{GT}
+\usetheme[dark,sectionToc,partToc]{GT} % remove the dark option for golden frame titles
+% partToc (resp. sectionToc) creates table of contents at the beginning of each part (resp. section)
 \usepackage{graphicx}
 
 
@@ -16,11 +16,11 @@
 %\usepackage[T1]{fontenc}
 \usepackage{appendixnumberbeamer}
 \usepackage{rotating}
-\usepackage{color}
+%\usepackage{color}
 
 
-\title[Ambush avoidance routing] % (optional, use only with long paper titles)
-{Ambush avoidance in unstructured environments: \textit{from game theory to path planning}}
+\title[Reduced title] % (optional, use only with long paper titles)
+{This is the title of this presentation}
 
 % - Give the names in the same order as the appear in the paper.
 % - Use the \inst{?} command only if the authors have different
@@ -30,7 +30,7 @@
 {Advisor: Dr. Eric Feron \\ Georgia Institute of Technology\\
   Guggenheim School of Aerospace Engineering}
 
-\date{November $3^{rd}$, 2014} % (optional, should be abbreviation of conference name)
+\date{May $11^{th}$, 2015} % (optional, should be abbreviation of conference name)
 
 % - Either use conference name or its abbreviation.
 % - Not really informative to the audience, more for people (including
@@ -47,6 +47,8 @@
 \setbeamertemplate{headline}{}
 \setlength{\headheight}{0in}
 \setbeamertemplate{footline}{}
+%\setbeamercovered{invisible}
+
 \begin{frame}
 \titlepage
 \end{frame}
@@ -56,8 +58,13 @@
 {
 \setbeamertemplate{headline}{}
 \begin{frame}\frametitle{Outline}
-  %\parttableofcontents
-  \tableofcontents[onlyparts]
+  \begin{columns}
+  	\begin{column}{.7\textwidth}
+  		\begin{tocblock}{}
+  		\vspace*{1em}\tableofcontents[onlyparts]
+  		\end{tocblock}		
+  	\end{column}
+  \end{columns}
 \end{frame} 
 }
 
@@ -65,6 +72,7 @@
 
 \section{Section 1}
 \subsection{Subsection 1.1}
+%%%%%
 \begin{frame}\frametitle{Intro - Frame 1} 
 \begin{block}{Basic Block Title}
 \begin{itemize}
@@ -129,5 +137,10 @@
 \begin{frame}\frametitle{Test frame three}test\end{frame}
 \section{Test Section Four}
 \begin{frame}\frametitle{Test frame four}test\end{frame}
+
+\bibliographystyle{plain}
+\begin{frame}[allowframebreaks]\frametitle{References}
+\bibliography{../proposal_references}
+\end{frame}
 
 \end{document}
