@@ -13,12 +13,47 @@
 \useoutertheme[subsection=false]{miniframes}
 \setbeamertemplate{mini frame in other section}[default][20]
 \setbeamertemplate{section/subsection in toc}[subsections numbered]
-\usepackage{totcount}
-\usepackage{tikz}
+\setbeamertemplate{subsection in navigation}{\vspace*{-\baselineskip}}
+\setbeamertemplate{subsection in navigation shaded}{\vspace*{-\baselineskip}}
+%\usepackage{multicol}
 
-\newif\if@darkOption
-\@darkOptionfalse
-\DeclareOption{dark}{\@darkOptiontrue}
+\definecolor{gtnavy}{rgb}{0,0,0.45}
+\definecolor{gtgold}{RGB}{152,126,82}
+\definecolor{gtlightgold}{RGB}{244,242,237}
+\definecolor{gtdarknavy}{RGB}{0,43,85}
+\definecolor{gtltgray}{rgb}{0.97,0.97,0.97}
+\definecolor{gtmediumgold}{RGB}{172,151,116}
+\definecolor{gtmediumgold}{RGB}{152,126,82}
+	
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+\setbeamertemplate{navigation symbols}{}
+
+% for first toc
+\newenvironment<>{tocblock}[1][]{%
+	\if@goldOption
+		\setbeamercolor{block title}{fg=white,bg=gtgold}%
+		\setbeamercolor{block body}{fg=white,bg=gtgold}%
+	\else
+		\setbeamercolor{block title}{fg=white,bg=gtdarknavy}%
+		\setbeamercolor{block body}{fg=white,bg=gtdarknavy}%
+	\fi
+  	\begin{block}{#1}}{\end{block}}
+  
+% for section toc
+\newenvironment<>{sectiontocblock}[1][]{%
+	\if@goldOption
+		\setbeamercolor{block title}{fg=white,bg=gtgold}%
+		\setbeamercolor{block body}{fg=gtdarknavy,bg=white!75!bg!90!gtgold}%
+	\else
+		\setbeamercolor{block title}{fg=white,bg=gtgold}%
+		\setbeamercolor{block body}{fg=gtdarknavy,bg=white!75!bg!90!gtgold}%
+	\fi
+  	\begin{block}{#1}}{\end{block}}
+
+\newif\if@goldOption
+\@goldOptionfalse
+\DeclareOption{gold}{\@goldOptiontrue}
 
 \newif\if@sectionTocOption
 \@sectionTocOptionfalse
@@ -30,33 +65,86 @@
 
 \ProcessOptions
 % choose between dark and light colors
-\if@darkOption
-	\usecolortheme{buzz-dark}
+\if@goldOption
+	\setbeamercolor{section in toc}{fg=gtdarknavy,bg=white}
+	\setbeamercolor{section number projected}{bg=gtdarknavy,fg=white}
+	\setbeamercolor{subsection in toc}{fg=gtdarknavy,bg=white}
+	\setbeamercolor{subsection number projected}{bg=gtgold,fg=white}
+	
+	% header, footer, navigation
+	\setbeamercolor*{palette primary}{fg=gtdarknavy,bg=gtgold}
+	\setbeamercolor*{palette secondary}{fg=gtdarknavy,bg=gtlightgold}%bottom left
+	\setbeamercolor*{palette tertiary}{fg=white,bg=gtdarknavy}%bottom right
+	\setbeamercolor*{palette quaternary}{fg=gtdarknavy,bg=gtgold}
+	\setbeamercolor*{sidebar}{fg=gtdarknavy,bg=gtgold}
+	
+	% first page (title)
+	\setbeamercolor{titlelike}{fg=white,bg=gtgold}
+	\setbeamercolor{frametitle}{fg=white,bg=gtmediumgold}
+	\setbeamercolor{frametitle right}{fg=black,bg=gtmediumgold}
+	
+	%\setbeamercolor*{palette sidebar primary}{fg=gtgold}
+	%\setbeamercolor*{palette sidebar secondary}{fg=white}
+	%\setbeamercolor*{palette sidebar tertiary}{fg=gtdarknavy,bg=white}
+	%\setbeamercolor*{palette sidebar quaternary}{fg=gtgold,bg=gtnavy}
+	
+	% blocks
+	\setbeamercolor{block title}{fg=white,bg=gtdarknavy}
+	\setbeamercolor{block body}{fg=black,bg=white!75!bg!95!gtdarknavy}
+	%
+	\setbeamercolor{alerted text}{fg=gtdarknavy,bg=gtgold} 
+	\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=gtdarknavy}
+	\setbeamercolor{block body alerted}{use=alerted text,fg=black,bg=white!75!bg!80!gtdarknavy}
+	%
+	\setbeamercolor{example text}{fg=gtgold,bg=gtdarknavy} 
+	\setbeamercolor{block title example}{use=example text,fg=white,bg=gtgold}
+	\setbeamercolor{block body example}{use=example text,fg=black,bg=white!75!bg!90!gtgold}
+	
+	
+	\colorlet{ProgressColor}{gtdarknavy}
+	\colorlet{ProgressBack}{gtgold}
+	\colorlet{ProgressBorder}{white}
 \else
-	\usecolortheme{buzz-light}
+	\setbeamercolor{section in toc}{fg=gtdarknavy,bg=white}
+	\setbeamercolor{section number projected}{bg=gtgold,fg=white}
+	\setbeamercolor{subsection in toc}{fg=gtdarknavy,bg=white}
+	\setbeamercolor{subsection number projected}{bg=gtdarknavy,fg=white}
+	
+	% header, footer, navigation
+	\setbeamercolor*{palette primary}{fg=gtdarknavy,bg=white}
+	\setbeamercolor*{palette secondary}{fg=gtdarknavy,bg=gtgold}%bottom left
+	\setbeamercolor{navigation}{fg=gtdarknavy,bg=white}
+	\setbeamercolor*{palette tertiary}{fg=gtdarknavy,bg=gtlightgold}%bottom right
+	\setbeamercolor*{palette quaternary}{fg=gtdarknavy,bg=white}
+	\setbeamercolor*{sidebar}{fg=gtdarknavy,bg=gtgold}
+	
+	% first page (title)
+	\setbeamercolor{titlelike}{fg=white,bg=gtdarknavy}
+	\setbeamercolor{frametitle}{fg=white,bg=gtdarknavy}
+	\setbeamercolor{frametitle right}{fg=white,bg=gtnavy}
+	
+	%\setbeamercolor*{palette sidebar primary}{fg=gtgold}
+	%\setbeamercolor*{palette sidebar secondary}{fg=white}
+	%\setbeamercolor*{palette sidebar tertiary}{fg=gtdarknavy,bg=white}
+	%\setbeamercolor*{palette sidebar quaternary}{fg=gtgold,bg=gtnavy}
+	
+	% blocks
+	\setbeamercolor{block title}{fg=white,bg=gtdarknavy}
+	\setbeamercolor{block body}{fg=black,bg=white!85!bg!95!gtdarknavy}
+	%
+	\setbeamercolor{alerted text}{fg=gtdarknavy,bg=gtgold} 
+	\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=gtdarknavy}
+	\setbeamercolor{block body alerted}{use=alerted text,fg=black,bg=white!75!bg!80!gtdarknavy}
+	%
+	\setbeamercolor{example text}{fg=gtgold,bg=gtdarknavy} 
+	\setbeamercolor{block title example}{use=example text,fg=white,bg=gtgold}
+	\setbeamercolor{block body example}{use=example text,fg=black,bg=white!75!bg!90!gtgold}
+	
+	
+	\colorlet{ProgressColor}{gtdarknavy}
+	\colorlet{ProgressBack}{white}
+	\colorlet{ProgressBorder}{white}
 \fi
-
-% for first toc
-\newenvironment<>{tocblock}[1][]{%
-	\if@darkOption
-		\setbeamercolor{block title}{fg=white,bg=gtdarknavy}%
-		\setbeamercolor{block body}{fg=white,bg=gtdarknavy}%
-	\else
-		\setbeamercolor{block title}{fg=white,bg=gtgold}%
-		\setbeamercolor{block body}{fg=white,bg=gtgold}%
-	\fi
-  	\begin{block}{#1}#2}{\end{block}}
-  
-% for section toc
-\newenvironment<>{sectiontocblock}[1][]{%
-	\if@darkOption
-		\setbeamercolor{block title}{fg=black,bg=gtdarknavy}%
-		\setbeamercolor{block body}{fg=black,bg=white!85!bg!95!gtdarknavy}%white!85!bg!95!gtdarknavy
-	\else
-		\setbeamercolor{block title}{fg=gtgold,bg=gtgold}%
-		\setbeamercolor{block body}{fg=gtdarknavy,bg=white!75!bg!90!gtgold}%
-	\fi
-  	\begin{block}{#1}#2}{\end{block}}
 
 % if section table of content want, add sectionToc option to the theme
 \if@sectionTocOption
@@ -68,10 +156,9 @@
 		\begin{column}{.7\textwidth}
 		  	%\frametitle{\insertsection}
 			\setcounter{tocdepth}{2}
-			\begin{sectiontocblock}{\insertpart}
+			\begin{block}{\insertpart}
 			\begin{columns}
 			\begin{column}{.05\textwidth}
-			
 			\end{column}
 		  	\begin{column}{.95\textwidth}
 		  	\tableofcontents[
@@ -82,7 +169,7 @@
 		  	\end{column}
 		  	\end{columns}
 			\vspace*{.5em}
-			\end{sectiontocblock}
+			\end{block}
 		\end{column}
 		\begin{column}{.1\textwidth}
 		\end{column}
@@ -101,16 +188,17 @@
 			\begin{frame}
 			\hypertarget{part\the\c@part}{}
 			\partpage	
+			%\vspace*{.5em}
 			\begin{columns}
 			\begin{column}{.05\textwidth}
-			
 			\end{column}
 			\begin{column}{.95\textwidth}
-			\tableofcontents[
-			  currentsection,
-			  sectionstyle=show/show,
-			  subsectionstyle=hide/hide/hide
-			]
+				\tableofcontents[
+				  currentsection,
+				  sectionstyle=show/show,
+				  subsectionstyle=hide/hide/hide
+				  %subsubsectionstyle=show/hide/hide
+				]
 			\end{column}
 			\end{columns}	
 			\end{frame} 
@@ -139,7 +227,6 @@
   \ifnum\c@tocdepth=-1\relax
     % requesting onlyparts.
     \hyperlink{part#1}{\makebox[4em]{\rom{#1}} #2\vspace{1em}}
-    % \hyperlink{\Navigation##1}{\makebox[3em]{#1} #2}
     \par
   \fi
 }
@@ -149,45 +236,8 @@
 }
 \makeatother%
 
-
-\regtotcounter{section}
-\newcounter{vertrules}
-
 \setbeamerfont{block title}{size={}}
 \let\Tiny=\tiny
-
-%\setbeamertemplate{navigation symbols}{}
-
-%\setbeamertemplate{headline}
-%{%
-%  \begin{beamercolorbox}[wd=\paperwidth,ht=2em]{myheadline}
-%    \vskip1.5ex%
-%    \insertsectionnavigationhorizontal{\paperwidth}{\hskip-0pt}{\hskip-0pt}\vskip2pt
-%  \end{beamercolorbox}%
-%  \setcounter{vertrules}{\totvalue{section}}
-%  \ifnum\thevertrules<2 \else
-%  \addtocounter{vertrules}{-1}
-%  \fi%
-%}
-
-%\setbeamertemplate{section in head/foot}{%
-%    \hspace*{-4pt}\setlength\fboxsep{0pt}%
-%    \parbox[c][2ex][t]{\dimexpr\sectionboxwd\relax}{%
-%      \hfill\parbox{\dimexpr\sectionboxwd\relax}{%
-%      \raggedright\insertsectionhead%
-%      }\hfill\mbox{}%
-%    }\hspace*{4pt}%
-%}
-%\newlength\sectionboxwd
-%
-%\AtBeginDocument{%
-%  \ifnum\totvalue{section}>0 
-%    \setlength\sectionboxwd{\dimexpr\paperwidth/\totvalue{section}\relax}
-%  \else
-%    \setlength\sectionboxwd{\paperwidth}
-%  \fi
-%} 
-
 
 \beamersetuncovermixins{\opaqueness<1>{10}}{\opaqueness<2->{5}}
 %slide number
@@ -207,19 +257,6 @@
 \patchcmd{\slideentry}{\advance\beamer@xpos by1\relax}{}{}{}
 \def\beamer@subsectionentry#1#2#3#4#5{\advance\beamer@xpos by1\relax}%
 \makeatother
-
-\makeatletter
-\setbeamertemplate{subsection in navigation}
-  {\vspace*{-\baselineskip}}
-\setbeamertemplate{subsection in navigation shaded}
-  {\vspace*{-\baselineskip}}
-\makeatother
-
-%\AtBeginEnvironment{exampleblock}{%
-%	\setbeamercolor{itemize item}{fg=gtgold,bg=gtgold}
-%	\setbeamercolor{itemize subitem}{fg=gtgold,bg=gtgold}
-%	\setbeamercolor{itemize subsubitem}{fg=gtgold,bg=gtgold}
-%}
 
 \logo{\includegraphics[width=0.2\textwidth]{logoGT.PNG}}
 

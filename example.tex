@@ -1,12 +1,11 @@
 % Copyright 2014 by Emmanuel Boidot <eboidot3@gatech.edu>
 \documentclass[10pt,compress]{beamer}
 
-\usetheme[dark,sectionToc,partToc]{GT} % remove the dark option for golden frame titles
+%%%% GT theme %%%%
+% add 'gold' option for golden frame titles
 % partToc (resp. sectionToc) creates table of contents at the beginning of each part (resp. section)
-\usepackage{graphicx}
+\usetheme[sectionToc,partToc]{GT} 
 
-
-\usepackage{natbib}
 \usepackage{graphicx}
 \usepackage[footnotesize]{subfigure}
 \usepackage[english]{babel}
@@ -14,35 +13,27 @@
 % uncomment for Times font
 %\usepackage{times}
 %\usepackage[T1]{fontenc}
-\usepackage{appendixnumberbeamer}
-\usepackage{rotating}
-%\usepackage{color}
 
 
-\title[Reduced title] % (optional, use only with long paper titles)
+\title[Short title] % (optional, use only with long paper titles, appears in the lower right part of each frame)
 {This is the title of this presentation}
 
 % - Give the names in the same order as the appear in the paper.
 % - Use the \inst{?} command only if the authors have different
 %   affiliation.
-\author[E. Boidot]{Ph.D. Proposal by Emmanuel Boidot}
+\author[E. Boidot]% (optional, appears in the lower left part of each frame)
+{Ph.D. Proposal by Emmanuel Boidot}
 \institute % (optional, but mostly needed)
 {Advisor: Dr. Eric Feron \\ Georgia Institute of Technology\\
   Guggenheim School of Aerospace Engineering}
 
 \date{May $11^{th}$, 2015} % (optional, should be abbreviation of conference name)
 
-% - Either use conference name or its abbreviation.
-% - Not really informative to the audience, more for people (including
-%   yourself) who are reading the slides online
-% \logo{logo.png}
-
-\subject{Graceful Degradation}
-%\logo{\includegraphics[width=0.2\textwidth]{logoGT.PNG}}
+\subject{Game theory, Path planning}
 
 \begin{document}
 
-{
+{ % for the title frame, use the following options
 \usebackgroundtemplate{\includegraphics[width=\paperwidth]{images/logos/Georgia-Tech-Insignia-Watermark-1200x1100}}
 \setbeamertemplate{headline}{}
 \setlength{\headheight}{0in}
@@ -68,6 +59,8 @@
 \end{frame} 
 }
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \part[Intro]{Introduction} 
 
 \section{Section 1}
